@@ -1,0 +1,433 @@
+\documentclass[a4paper,11pt]{article}
+
+% Package imports
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+\usepackage{fontawesome5}
+
+% Color definitions
+\definecolor{darkblue}{RGB}{0,0,139}
+
+% Page layout
+\setlength{\multicolsep}{0pt} 
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
+\setlength{\footskip}{5pt} % Addressing fancyhdr warning
+
+% Hyperlink setup (moved after fancyhdr to address warning)
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    filecolor=darkblue,
+    urlcolor=darkblue,
+}
+
+% Custom box settings
+\usepackage[most]{tcolorbox}
+\tcbset{
+    frame code={},
+    center title,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    colback=gray!20,
+    colframe=white,
+    width=\dimexpr\textwidth\relax,
+    enlarge left by=-2mm,
+    boxsep=4pt,
+    arc=0pt,outer arc=0pt,
+}
+
+% URL style
+\urlstyle{same}
+
+% Text alignment
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand{\labelitemii}{$\vcenter{\hbox{\tiny$\circ$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=0.5mm]}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+
+% Commands for icon sizing and positioning
+\newcommand{\socialicon}[1]{\raisebox{-0.05em}{\resizebox{!}{1em}{#1}}}
+\newcommand{\ieeeicon}[1]{\raisebox{-0.3em}{\resizebox{!}{1.3em}{#1}}}
+
+% Font options
+\newcommand{\headerfonti}{\fontfamily{phv}\selectfont} % Helvetica-like (similar to Arial/Calibri)
+\newcommand{\headerfontii}{\fontfamily{ptm}\selectfont} % Times-like (similar to Times New Roman)
+\newcommand{\headerfontiii}{\fontfamily{ppl}\selectfont} % Palatino (elegant serif)
+\newcommand{\headerfontiv}{\fontfamily{pbk}\selectfont} % Bookman (readable serif)
+\newcommand{\headerfontv}{\fontfamily{pag}\selectfont} % Avant Garde-like (similar to Trebuchet MS)
+\newcommand{\headerfontvi}{\fontfamily{cmss}\selectfont} % Computer Modern Sans Serif
+\newcommand{\headerfontvii}{\fontfamily{qhv}\selectfont} % Quasi-Helvetica (another Arial/Calibri alternative)
+\newcommand{\headerfontviii}{\fontfamily{qpl}\selectfont} % Quasi-Palatino (another elegant serif option)
+\newcommand{\headerfontix}{\fontfamily{qtm}\selectfont} % Quasi-Times (another Times New Roman alternative)
+\newcommand{\headerfontx}{\fontfamily{bch}\selectfont} % Charter (clean serif font)
+
+\begin{document}
+\headerfontiii
+
+% Header
+\begin{center}
+    {\Huge\textbf{Min Cheol Seo}}
+\end{center}
+\vspace{-6mm}
+
+\begin{center}
+    \small{
+    +1 614-292-3663 | \href{mailto:mail@mincheolseo.com}{mail@mincheolseo.com} | 
+    \href{https://www.mincheolseo.com/}{mincheolseo.com}
+    }
+\end{center}
+\vspace{-5mm}
+
+\begin{center}
+    \small{
+    \socialicon{\faOrcid} \href{https://orcid.org/0000-0002-8481-0451/}{0000-0002-8481-0451} | 
+%    \ieeeicon{\includegraphics[height=1.3em]{ieee_collabratec_icon.png}} \href{https://ieee-collabratec.ieee.org/app/p/your-profile}{your-profile} |
+    \socialicon{\faGit*} \href{https://codeberg.org/im_logicist}{codeberg.org/im\_logicist}
+    }
+\end{center}
+\vspace{-5mm}
+\begin{center}
+    \small{337E University Hall, 230 N. Oval Mall Columbus, Ohio 43210, United States}
+\end{center}
+
+\vspace{-4mm}
+
+\section{\textbf{Areas}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+\resumeSubheading
+{Areas of Specialisation}{}
+{Philosophy of Mathematics, Logic, Philosophy of Logic}{}
+\resumeItemListStart
+\item[]
+\resumeItemListEnd
+\vspace{-4mm}
+\resumeSubheading
+{Areas of Competence}{}
+{Epistemology, Formal Epistemology, Metaphysics, Philosophy of AI, Philosophy of Music}{}
+\resumeItemListStart
+\item[]
+\resumeItemListEnd
+\vspace{-4mm}
+\resumeSubHeadingListEnd
+\vspace{-4mm}
+
+\section{\textbf{Education}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{The Ohio State University}{Columbus, OH. United Stats}
+{Ph.D. in Philosophy}{August 2026 - Current}
+
+
+\resumeSubheading
+{Sungkyunkwan University}{Seoul, South Korea}
+{Ph.D. in Philosophy}{August 2022 - January 2026}
+%\resumeItemListStart
+%\item \small{Supervisor: Jeonggyu Lee}
+%\item \small{GPA: 4.42/4.5}
+%\resumeItemListEnd
+
+\resumeSubheading
+{University of St Andrews}{St Andrews, United Kingdom}
+{MLitt in Logic and Metaphysics}{August 2017 - June 2018}
+%\resumeItemListStart
+%\item \small{Dissertation: \textit{Knowledge as Justified True Belief: Constructive Knowledge and the Logic of Justification}}
+%\item \small{Supervisor: Kevin Scharp}
+%\item \small{Grade: PASS (13.1) \tiny{(\textit{GPA: 3.1/4.0 in Conversion})}}
+%\resumeItemListEnd
+
+\resumeSubheading
+{University of York}{York, United Kingdom}
+{BA in Philosophy}{August 2014 - July 2017}
+%\resumeItemListStart
+%\item \small{Dissertation: \textit{The Bad Company Objection}}
+%\item \small{Supervisor: Robert Trueman}
+%\item \small{Grade: Upper II-1 Honours (65\%) \tiny{(\textit{GPA: 3.6/4.0 in Conversion})}}
+%\resumeItemListEnd
+
+\resumeSubheading
+{Tech Music School}{London, United Kingdom}
+{DipHE in Music Performance}{August 2007 - June 2009}
+
+\resumeSubHeadingListEnd
+\vspace{-4mm}
+
+\section{\textbf{Work Experiences}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+\resumeSubheading
+{{SK Inc.}}{South Korea}
+{Corporate Strategy \& Portfolio Management}{March 2020 - June 2022}
+
+\resumeSubheading
+{{KOLON Industries}}{South Korea}
+{R\&D Strategy}{March 2020 - January 2021}
+
+\resumeSubheading
+{{Republic of Korea Army}}{South Korea}
+{Mandatory Military Service}{November 2010 - August 2012}
+
+\resumeSubheading
+{{Red House Recording Studio}}{South Korea}
+{In-House Recording Artist}{June 2009 - August 2010}
+
+\resumeSubHeadingListEnd
+\vspace{-4mm}
+
+\section{\textbf{Publications} \hfill \textcolor{darkblue}{\scriptsize C=Conference, J=Journal, B=Book, S=In Submission, T=Thesis}}
+\vspace{0.2mm}
+\small{
+  \begin{enumerate}[leftmargin=*, labelsep=0.5em, align=left, widest={[\textbf{S.1}]}, itemindent=0em, label={\textbf{[\arabic*]}]}]
+    \item[\textbf{[J.1]}] Chanwoo Lee, Min Cheol Seo, Youngseo Yeo. [\emph{Forthcoming}]. \href{https://https://www.logicalkorea.com/%eb%85%bc%eb%a6%ac%ec%97%b0%ea%b5%ac-%eb%aa%a9%eb%a1%9d/}{\textbf{Philosophical Perspectives on Proof Automation in Mathematics}}. \textit{Korean Journal of Logic}, Vol. 29, Issue 3, pp.253-329.
+\end{enumerate}
+}
+
+\section{\textbf{Presentations \& Commentaries} \hfill \textcolor{darkblue}{\scriptsize E=in English, K=in Korean}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+\resumeSubheading
+{[E] Proofs, Computers, and the Mathematical Agents}
+{\textit{July 2026}}
+{1\textsuperscript{st} Asian Philosophy of Science Association Conference \textsc{[\href{https://www.philsciasia.org/apsa26/}{\textcolor{darkblue}{\faIcon{globe}}}]}}{Nanyang Technological University, Singapore}
+\resumeItemListStart
+\item[]
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+\resumeSubheading
+{[E] Mathematical Structuralism and the Univalent Foundations}{\textit{January 2026}}
+{5\textsuperscript{th} Korea Logic Day \textsc{[\href{https://korealogicday.org/2026/}{\textcolor{darkblue}{\faIcon{globe}}}]}}{Korea Advanced Institute of Science and Technology}
+\resumeItemListStart
+\item[]
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+\resumeSubheading
+{[E] Proofs, Computers and Mathematical Agent}{\textit{November 2025}}
+{SKKU-NU Phil. Workshop 2025 \textsc{[\href{https://sites.google.com/site/masashikasaki2/\%E3\%82\%A4\%E3\%83\%99\%E3\%83\%B3\%E3\%83\%88/philosophical-interchange-between-sungkyunkwan-and-nagoya-university?authuser=0/}{\textcolor{darkblue}{\faIcon{globe}}}]}}{Nagoya University}
+\resumeItemListStart
+\item[]
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+\resumeSubheading
+{[K] Comments on ``\textit{Conventionalist Logic 2Dfier}'' by Dr. Ha}{\textit{October 2025}}
+{UCKP 2025 \textsc{[\href{https://hanchul.org/board/notice/article/267452}{\textcolor{darkblue}{\faIcon{globe}}}]}}{Jeonbuk National University}
+\resumeItemListStart
+\item[]
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+\resumeSubheading
+{[E] Multi-Agent Belief Ascription}{\textit{June 2025}}
+{APPSA-LMPST 2025 \textsc{[\href{https://appsa2025taiwan.mystrikingly.com/}{\textcolor{darkblue}{\faIcon{globe}}}]}}{National Yang Ming Chiao Tung University}
+\resumeItemListStart
+\item[]
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+\resumeSubheading
+{[K] Multi-Agent Simulative Belief Ascription}{\textit{January 2025}}
+{4\textsuperscript{th} Korea Logic Day \textsc{[\href{https://korealogicday.org/2025/}{\textcolor{darkblue}{\faIcon{globe}}}]}}{Changwon National University}
+\resumeItemListStart
+\item[]
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+
+\section{\textbf{Teaching Experiences}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+% Grouped Spring 2025
+\resumeSubheading
+{Grader and Teaching Assistant}{\textit{Spring 2025}}
+{Elementary Logic, Critical Thinking, Theoretical Thinking}{Sungkyunkwan University}
+
+% Fall 2024
+\resumeSubheading
+{Grader and Teaching Assistant}{\textit{Fall 2024}}
+{Theoretical Thinking}{Sungkyunkwan University}
+
+\resumeSubheading
+{Teaching Assistant}{\textit{Fall 2024}}
+{Sungkyun Classic Book Club}{Sungkyunkwan University}
+
+% Fall 2023
+\resumeSubheading
+{Teaching Assistant}{\textit{Spring 2024}}
+{Sungkyun Classic Book Club}{Sungkyunkwan University}
+
+\resumeSubHeadingListEnd
+\vspace{-4mm}
+
+\section{\textbf{Honours and Awards}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+\resumeProject{The 5\textsuperscript{th} Moha Analytic Philosophy Graduate Student Essay Award}
+{Korean Society for Analytic Philosophy}{July, 2026}
+{{}}
+\resumeItemListStart
+\item \footnotesize \textit{Multi-Agent Simulative Belief Ascrption}
+\resumeItemListEnd
+\resumeProject
+{International Conference Travel Grant}
+{Sungkyunkwan University}
+{June, 2025}
+{{}}
+\resumeItemListStart
+ \item \footnotesize \textit{Multi-Agent Belief Ascription} at APPSA-LMPST 2025. Taipei, Taiwan.
+\resumeItemListEnd
+\resumeProject
+{TA Scholarship}
+{Sungkyunkwan University}
+{Spring 2024 -- Spring 2025}
+{{}}
+\resumeItemListStart
+ \item[]
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+\vspace{-8mm}
+
+\section{\textbf{Languages and Skills}}
+\vspace{0.4mm}
+\resumeSubHeadingListStart
+\resumeSubheading
+{Languages}{}
+{Korean (Native), English (Proficient), German, Japanese (Intermediate)}{}
+\resumeItemListStart
+\item[]
+\resumeItemListEnd
+\vspace{-4mm}
+\resumeSubheading
+{Technical Skills}{}
+{Rocq (Coq), LISP, PROLOG, \LaTeX}{}
+\resumeItemListStart
+\item[]
+\resumeItemListEnd
+\vspace{-4mm}
+\resumeSubheading
+{Other Skills}{}
+{Music Performance (Jazz guitar), Music Production (DAWs: Ableton Live / Pro Tools)}{}
+\resumeItemListStart
+\item[]
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+\vspace{-8mm}
+
+%\section{\textbf{References}}
+%\vspace{0.4mm}
+%\small{
+%\begin{enumerate}[leftmargin=*,labelsep=2mm]
+%\item \textbf{Jeonggyu Lee} %\textsc{[\href{https://jeonggyulee.weebly.com/}{\textcolor{darkblue}{\faIcon{globe}}}]}\\
+%   Associate Professor, Department of Philosophy\\
+%   Sungkyunkwan University\\
+%   Email: \href{mailto:jeonggyulee@skku.edu}{jeonggyulee@skku.edu}\\
+%   Phone: +82-2-760-0203\\
+%   \textit{Relationship: Academic Supervisor}
+
+%\item \textbf{Nikolaj Jang Lee Linding Pedersen} \textsc{[\href{https://nikolajpedersen.com/}{\textcolor{darkblue}{\faIcon{globe}}}]}\\
+%   Underwood Distinguished Professor \& Professor of Philosophy, Underwood International College\\
+%   Yonsei University\\
+%   Email: \href{mailto:nikolaj@yonsei.ac.kr}{nikolaj@yonsei.ac.kr}\\
+%   Phone: +82-32-749-3010\\
+%   \textit{Relationship: Academic Mentor, Workshop Organiser}
+
+%\item \textbf{Byunghan Kim} \textsc{[\href{https://sites.google.com/yonsei.ac.kr/byunghankimshomepage/english}{\textcolor{darkblue}{\faIcon{globe}}}]}\\
+%   Professor, Department of Mathematics\\
+%   Yonsei University\\
+%   Email: \href{mailto:bkim@yonsei.ac.kr}{bkim@yonsei.ac.kr}\\
+%   Phone: +82-2-2123-2580\\
+%   \textit{Relationship: Lecturer}
+
+%\item \textbf{Chanwoo Lee} \textsc{[\href{https://chanwoo-lee-phil.github.io/}{\textcolor{darkblue}{\faIcon{globe}}}]}\\
+%   Assistant Professor, Dasan University College\\
+%   Ajou University\\
+%   Email: \href{mailto:chanwoolee@ajou.ac.kr}{chanwoolee@ajou.ac.kr}\\
+%   Phone: +82-31-219-2858\\
+%   \textit{Relationship: Lecturer}
+   
+%\end{enumerate}
+}
+\end{document}
